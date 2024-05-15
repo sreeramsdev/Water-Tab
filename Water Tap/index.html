@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Water Tanker</title>
+</head>
+<body>
+    <div class="main1" style="display: flex;">
+    <div id="tank" class="tank" >
+<div id="bluetank"></div>
+    </div>
+    <div class="main1-1">
+        <div  class="main1-1-1" style="display: flex;">
+            <div class="tapbtn" onclick="main()"></div>
+            <div class="tapHole"></div>
+        </div>
+        <div class="tapPipe">
+        </div>
+    <div class="water" id="water"></div>
+</div>
+</div>
+<div class="tub">
+    <div id="tub1"></div>
+</div>
+<script>
+
+var water=document.getElementById("bluetank")
+var interval
+var interval2
+var isFlowing=false;
+
+function main(){
+    
+    if(isFlowing){
+        stopFlow();
+    }
+    else if(!isFlowing){
+        startFlow();
+    }
+}
+var water1=document.getElementById("water")
+function startFlow(){
+    isFlowing=true;
+    interval=setInterval(waterDecrease,5)
+    water1.style.visibility="visible"
+    interval2=setInterval(tubWater,24)
+}
+function stopFlow(){
+     isFlowing=false;
+     clearInterval(interval)
+     water1.style.visibility="hidden"
+     clearInterval(interval2)
+}
+function waterDecrease(){
+    var water=document.getElementById("bluetank")
+    var currentHeight=water.clientHeight 
+    var newHeight=Math.max(currentHeight-1,0)
+    
+    document.getElementById("bluetank").style.height=newHeight+"px"
+    // var marginTop1=(397-newHeight)+"px"
+    document.getElementById("bluetank").style.marginTop=(397-newHeight)+"px"   
+
+    if(newHeight!=0){
+        water1.style.visibility="visible"
+    }
+    else if(newHeight==0) {
+        water1.style.visibility="hidden"
+    }
+}
+function tubWater(){
+    var tub=document.getElementById("tub1")
+    var currentTubHeight=tub.clientHeight
+    var newTubHeight=Math.max(currentTubHeight-0.1,0)
+    document.getElementById("tub1").style.height=newTubHeight+"px"
+    document.getElementById("tub1").style.marginBottom=(97-newTubHeight)+"px" 
+}
+</script>
+</body>
+</html>
